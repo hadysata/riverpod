@@ -83,7 +83,9 @@ class StreamProvider<T> extends _StreamProviderBase<T>
   }) : super(
           allTransitiveDependencies:
               computeAllTransitiveDependencies(dependencies),
-        );
+        ){
+    ProvidersList.streamProviders.add(this);
+        }
 
   /// An implementation detail of Riverpod
   @internal

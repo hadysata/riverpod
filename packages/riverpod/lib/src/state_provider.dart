@@ -1,6 +1,7 @@
 import 'package:meta/meta.dart';
 
 import 'internals.dart';
+import 'providers_list.dart';
 import 'state_controller.dart';
 
 part 'state_provider/auto_dispose.dart';

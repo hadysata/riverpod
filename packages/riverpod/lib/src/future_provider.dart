@@ -7,6 +7,7 @@ import 'builders.dart';
 import 'common.dart';
 import 'framework.dart';
 import 'provider.dart' show Provider;
+import 'providers_list.dart';
 import 'stream_provider.dart' show StreamProvider;
 
 part 'future_provider/auto_dispose.dart';

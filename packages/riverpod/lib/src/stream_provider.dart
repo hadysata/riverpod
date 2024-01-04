@@ -9,6 +9,7 @@ import 'framework.dart';
 import 'future_provider.dart' show FutureProvider;
 import 'listenable.dart';
 import 'provider.dart' show Provider;
+import 'providers_list.dart';
 import 'result.dart';
 
 part 'stream_provider/auto_dispose.dart';

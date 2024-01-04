@@ -18,7 +18,9 @@ class AutoDisposeStateProvider<T> extends _StateProviderBase<T> {
   }) : super(
           allTransitiveDependencies:
               computeAllTransitiveDependencies(dependencies),
-        );
+        ){
+    ProvidersList.autoDisposesStateProviders.add(this);
+        }
 
   /// An implementation detail of Riverpod
   @internal

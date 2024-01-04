@@ -16,8 +16,7 @@ abstract class ProviderRef<State> implements Ref<State> {
 
 /// {@macro riverpod.provider}
 @sealed
-class Provider<State> extends InternalProvider<State>
-    with AlwaysAliveProviderBase<State> {
+class Provider<State> extends InternalProvider<State> with AlwaysAliveProviderBase<State> {
   /// {@macro riverpod.provider}
   Provider(
     this._createFn, {
@@ -27,9 +26,10 @@ class Provider<State> extends InternalProvider<State>
     @Deprecated('Will be removed in 3.0.0') super.argument,
     @Deprecated('Will be removed in 3.0.0') super.debugGetCreateSourceHash,
   }) : super(
-          allTransitiveDependencies:
-              computeAllTransitiveDependencies(dependencies),
-        );
+          allTransitiveDependencies: computeAllTransitiveDependencies(dependencies),
+        ) {
+    ProvidersList.providers.add(this);
+  }
 
   /// An implementation detail of Riverpod
   @internal
@@ -319,8 +319,7 @@ class Provider<State> extends InternalProvider<State>
 ///   when that provider is no longer listened to.
 /// - [Provider.family], to allow providers to create a value from external parameters.
 /// {@endtemplate}
-class ProviderElement<State> extends ProviderElementBase<State>
-    implements ProviderRef<State> {
+class ProviderElement<State> extends ProviderElementBase<State> implements ProviderRef<State> {
   /// A [ProviderElementBase] for [Provider]
   @internal
   ProviderElement(super._provider);
@@ -345,8 +344,7 @@ class ProviderElement<State> extends ProviderElementBase<State>
 }
 
 /// The [Family] of [Provider]
-class ProviderFamily<R, Arg>
-    extends FamilyBase<ProviderRef<R>, R, Arg, R, Provider<R>> {
+class ProviderFamily<R, Arg> extends FamilyBase<ProviderRef<R>, R, Arg, R, Provider<R>> {
   /// The [Family] of [ProviderFamily]
   ProviderFamily(
     super._createFn, {
@@ -354,8 +352,7 @@ class ProviderFamily<R, Arg>
     super.dependencies,
   }) : super(
           providerFactory: Provider.internal,
-          allTransitiveDependencies:
-              computeAllTransitiveDependencies(dependencies),
+          allTransitiveDependencies: computeAllTransitiveDependencies(dependencies),
           debugGetCreateSourceHash: null,
         );
 

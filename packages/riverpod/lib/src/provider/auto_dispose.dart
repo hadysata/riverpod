@@ -17,7 +17,9 @@ class AutoDisposeProvider<T> extends InternalProvider<T> {
   }) : super(
           allTransitiveDependencies:
               computeAllTransitiveDependencies(dependencies),
-        );
+        ){
+    ProvidersList.autoDisposesProviders.add(this);
+        }
 
   /// An implementation detail of Riverpod
   @internal

@@ -20,7 +20,9 @@ class AutoDisposeFutureProvider<T> extends _FutureProviderBase<T>
   }) : super(
           allTransitiveDependencies:
               computeAllTransitiveDependencies(dependencies),
-        );
+        ){
+    ProvidersList.autoDisposesFutureProviders.add(this);
+        }
 
   /// An implementation detail of Riverpod
   @internal

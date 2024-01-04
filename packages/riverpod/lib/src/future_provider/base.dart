@@ -36,7 +36,9 @@ class FutureProvider<T> extends _FutureProviderBase<T>
   }) : super(
           allTransitiveDependencies:
               computeAllTransitiveDependencies(dependencies),
-        );
+        ){
+    ProvidersList.futureProviders.add(this);
+        }
 
   /// An implementation detail of Riverpod
   @internal

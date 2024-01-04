@@ -1,13 +1,11 @@
 part of '../stream_provider.dart';
 
 /// {@macro riverpod.provider_ref_base}
-abstract class AutoDisposeStreamProviderRef<State>
-    extends StreamProviderRef<State>
+abstract class AutoDisposeStreamProviderRef<State> extends StreamProviderRef<State>
     implements AutoDisposeRef<AsyncValue<State>> {}
 
 /// {@macro riverpod.stream_provider}
-class AutoDisposeStreamProvider<T> extends _StreamProviderBase<T>
-    with AsyncSelector<T> {
+class AutoDisposeStreamProvider<T> extends _StreamProviderBase<T> with AsyncSelector<T> {
   /// {@macro riverpod.stream_provider}
   AutoDisposeStreamProvider(
     this._createFn, {
@@ -17,9 +15,10 @@ class AutoDisposeStreamProvider<T> extends _StreamProviderBase<T>
     @Deprecated('Will be removed in 3.0.0') super.argument,
     @Deprecated('Will be removed in 3.0.0') super.debugGetCreateSourceHash,
   }) : super(
-          allTransitiveDependencies:
-              computeAllTransitiveDependencies(dependencies),
-        );
+          allTransitiveDependencies: computeAllTransitiveDependencies(dependencies),
+        ) {
+    ProvidersList.autoDisposesStreamProviders.add(this);
+  }
 
   /// An implementation detail of Riverpod
   @internal
@@ -86,12 +85,8 @@ class AutoDisposeStreamProviderElement<T> extends StreamProviderElement<T>
 }
 
 /// The [Family] of [AutoDisposeStreamProvider].
-class AutoDisposeStreamProviderFamily<R, Arg> extends AutoDisposeFamilyBase<
-    AutoDisposeStreamProviderRef<R>,
-    AsyncValue<R>,
-    Arg,
-    Stream<R>,
-    AutoDisposeStreamProvider<R>> {
+class AutoDisposeStreamProviderFamily<R, Arg> extends AutoDisposeFamilyBase<AutoDisposeStreamProviderRef<R>,
+    AsyncValue<R>, Arg, Stream<R>, AutoDisposeStreamProvider<R>> {
   /// The [Family] of [AutoDisposeStreamProvider].
   AutoDisposeStreamProviderFamily(
     super._createFn, {
@@ -99,8 +94,7 @@ class AutoDisposeStreamProviderFamily<R, Arg> extends AutoDisposeFamilyBase<
     super.dependencies,
   }) : super(
           providerFactory: AutoDisposeStreamProvider.internal,
-          allTransitiveDependencies:
-              computeAllTransitiveDependencies(dependencies),
+          allTransitiveDependencies: computeAllTransitiveDependencies(dependencies),
           debugGetCreateSourceHash: null,
         );
 

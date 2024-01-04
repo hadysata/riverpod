@@ -42,8 +42,7 @@ abstract class StateProviderRef<State> implements Ref<State> {
 /// }
 /// ```
 /// {@endtemplate}
-class StateProvider<T> extends _StateProviderBase<T>
-    with AlwaysAliveProviderBase<T> {
+class StateProvider<T> extends _StateProviderBase<T> with AlwaysAliveProviderBase<T> {
   /// {@macro riverpod.stateprovider}
   StateProvider(
     this._createFn, {
@@ -53,9 +52,10 @@ class StateProvider<T> extends _StateProviderBase<T>
     @Deprecated('Will be removed in 3.0.0') super.argument,
     @Deprecated('Will be removed in 3.0.0') super.debugGetCreateSourceHash,
   }) : super(
-          allTransitiveDependencies:
-              computeAllTransitiveDependencies(dependencies),
-        );
+          allTransitiveDependencies: computeAllTransitiveDependencies(dependencies),
+        ) {
+    ProvidersList.stateProviders.add(this);
+  }
 
   /// An implementation detail of Riverpod
   @internal
@@ -84,8 +84,7 @@ class StateProvider<T> extends _StateProviderBase<T>
   StateProviderElement<T> createElement() => StateProviderElement._(this);
 
   @override
-  late final AlwaysAliveRefreshable<StateController<T>> notifier =
-      _notifier(this);
+  late final AlwaysAliveRefreshable<StateController<T>> notifier = _notifier(this);
 
   @Deprecated(
     'Will be removed in 3.0.0. '
@@ -114,8 +113,7 @@ class StateProvider<T> extends _StateProviderBase<T>
 }
 
 /// The element of [StateProvider].
-class StateProviderElement<T> extends ProviderElementBase<T>
-    implements StateProviderRef<T> {
+class StateProviderElement<T> extends ProviderElementBase<T> implements StateProviderRef<T> {
   StateProviderElement._(_StateProviderBase<T> super._provider);
 
   @override
@@ -162,8 +160,7 @@ class StateProviderElement<T> extends ProviderElementBase<T>
   @override
   void visitChildren({
     required void Function(ProviderElementBase<Object?> element) elementVisitor,
-    required void Function(ProxyElementValueNotifier<Object?> element)
-        notifierVisitor,
+    required void Function(ProxyElementValueNotifier<Object?> element) notifierVisitor,
   }) {
     super.visitChildren(
       elementVisitor: elementVisitor,
@@ -175,8 +172,7 @@ class StateProviderElement<T> extends ProviderElementBase<T>
 }
 
 /// The [Family] of [StateProvider].
-class StateProviderFamily<R, Arg>
-    extends FamilyBase<StateProviderRef<R>, R, Arg, R, StateProvider<R>> {
+class StateProviderFamily<R, Arg> extends FamilyBase<StateProviderRef<R>, R, Arg, R, StateProvider<R>> {
   /// The [Family] of [StateProvider].
   StateProviderFamily(
     super._createFn, {
@@ -185,8 +181,7 @@ class StateProviderFamily<R, Arg>
   }) : super(
           providerFactory: StateProvider.internal,
           debugGetCreateSourceHash: null,
-          allTransitiveDependencies:
-              computeAllTransitiveDependencies(dependencies),
+          allTransitiveDependencies: computeAllTransitiveDependencies(dependencies),
         );
 
   /// {@macro riverpod.override_with}
