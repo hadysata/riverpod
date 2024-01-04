@@ -21,9 +21,7 @@ dependencies:
   meta: ^1.7.0
   path: ^1.8.1
   riverpod:
-    git:
-      url: https://github.com/hadysata/riverpod.git
-      path: packages/riverpod
+    path: ../riverpod
 
   riverpod_analyzer_utils: ^0.5.0
   source_span: ^1.8.0
