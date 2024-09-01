@@ -1,3 +1,7 @@
+## 0.5.4 - 2024-08-15
+
+Bump custom_lint
+
 ## 0.5.3 - 2024-05-14
 
 - Correctly set minimum support analyzer version to 6.5.0
