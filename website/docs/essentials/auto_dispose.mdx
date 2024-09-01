@@ -1,9 +1,10 @@
 ---
 title: "Clearing cache and reacting to state disposal"
+version: 1
 ---
 
-import { Link } from "../../src/components/Link";
-import { AutoSnippet, When } from "../../src/components/CodeSnippet";
+import { Link } from "/src/components/Link";
+import { AutoSnippet, When } from "/src/components/CodeSnippet";
 import onDisposeExample from "./auto_dispose/on_dispose_example";
 import codegenKeepAlive from "!!raw-loader!./auto_dispose/codegen_keep_alive.dart";
 import rawAutoDispose from "!!raw-loader!./auto_dispose/raw_auto_dispose.dart";
@@ -103,13 +104,13 @@ makes it easier to spot when we forget to dispose of something.
 
 Sometimes, you may want to force the destruction of a provider.
 This can be done by using `ref.invalidate`, which can be called from another
-provider or from a widget.
+provider or a widget.
 
 Using `ref.invalidate` will destroy the current provider state.
 There are then two possible outcomes:
 
-- If the provider is listened, a new state will be created.
-- If the provider is not listened, the provider will be fully destroyed.
+- If the provider is listened to, a new state will be created.
+- If the provider is not listened to, the provider will be fully destroyed.
 
 <AutoSnippet raw={invalidateExample} />
 

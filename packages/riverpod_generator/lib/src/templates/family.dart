@@ -13,7 +13,13 @@ String providerFamilyNameFor(
   ProviderDeclarationElement provider,
   BuildYamlOptions options,
 ) {
-  return '${provider.name.lowerFirst}${options.providerFamilyNameSuffix ?? options.providerNameSuffix ?? 'Provider'}';
+  final prefix =
+      options.providerFamilyNamePrefix ?? options.providerNamePrefix ?? '';
+  final rawProviderName = provider.name;
+  final suffix = options.providerFamilyNameSuffix ??
+      options.providerNameSuffix ??
+      'Provider';
+  return '$prefix${prefix.isEmpty ? rawProviderName.lowerFirst : rawProviderName.titled}$suffix';
 }
 
 class FamilyTemplate extends Template {
@@ -71,11 +77,12 @@ class FamilyTemplate extends Template {
       }
     }
 
-    final parameters = provider
-        .node.functionExpression.parameters!.parameterElements
-        .whereNotNull()
-        .skip(1)
-        .toList();
+    final parameters =
+        provider.node.functionExpression.parameters!.parameterElements
+            // ignore: deprecated_member_use, stuck with SDK >=2.x.0 for now
+            .whereNotNull()
+            .skip(1)
+            .toList();
 
     final parametersPassThrough = buildParamInvocationQuery({
       for (final parameter in parameters) parameter: parameter.name,
@@ -150,6 +157,7 @@ ${parameters.map((e) => '        ${e.name}: ${e.name},\n').join()}
     }
 
     final parameters = provider.buildMethod.parameters!.parameterElements
+        // ignore: deprecated_member_use, stuck with SDK >=2.x.0 for now
         .whereNotNull()
         .toList();
     final parameterDefinition = buildParamDefinitionQuery(parameters);
@@ -307,7 +315,7 @@ class $providerTypeNameImpl extends $providerType$providerGenerics {
     )}
   }) : super.internal();
 
-${parameters.map((e) => 'final ${e.type.getDisplayString(withNullability: true)} ${e.name};').join()}
+${parameters.map((e) => 'final ${e.type.getDisplayString()} ${e.name};').join()}
 
 $providerOther
 

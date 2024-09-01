@@ -1,5 +1,6 @@
 ---
 title: About hooks
+version: 1
 ---
 
 import Tabs from "@theme/Tabs";
@@ -7,8 +8,8 @@ import TabItem from "@theme/TabItem";
 import hookAndConsumer from "!!raw-loader!./about_hooks/hook_and_consumer.dart";
 import hookConsumer from "!!raw-loader!./about_hooks/hook_consumer.dart";
 import hookConsumerWidget from "!!raw-loader!./about_hooks/hook_consumer_widget.dart";
-import { CodeSnippet } from "../../src/components/CodeSnippet";
-import { Link } from "../../src/components/Link";
+import { CodeSnippet } from "/src/components/CodeSnippet";
+import { Link } from "/src/components/Link";
 
 This page explains what are hooks and how they are related to Riverpod.
 
@@ -147,7 +148,7 @@ class FadeIn extends HookWidget {
 There are a few interesting things to note in this code:
 
 - There is no memory leak. This code does not recreate a new `AnimationController` whenever the
-  widget rebuild, and the controller is correctly released when the widget is unmounted.
+  widget rebuilds, and the controller is correctly released when the widget is unmounted.
 
 - It is possible to use hooks as many time as we want within the same widget.
   As such, we can create multiple `AnimationController` if we want:

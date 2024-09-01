@@ -53,14 +53,22 @@ class AsyncValueNullablePattern extends RiverpodLintRule {
       }
 
       grandParentType as InterfaceType;
-      final genericType = grandParentType.typeArguments.first;
+      var genericType = grandParentType.typeArguments.first;
+
+      // If the AsyncValue's type is a generic type, we check the generic's constraint
+      if (genericType is TypeParameterType) {
+        final unit = node.thisOrAncestorOfType<CompilationUnit>()!;
+
+        genericType = genericType.element.bound ??
+            unit.declaredElement!.library.typeProvider.dynamicType;
+      }
 
       if (genericType is! DynamicType &&
           genericType.nullabilitySuffix != NullabilitySuffix.question) {
         return;
       }
 
-      reporter.reportErrorForNode(_code, node);
+      reporter.atNode(node, _code);
     });
   }
 

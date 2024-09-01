@@ -1,13 +1,14 @@
 ---
 title: FAQ
+version: 1
 ---
 
-import { Link } from "../../src/components/Link";
-import { AutoSnippet, When } from "../../src/components/CodeSnippet";
+import { Link } from "/src/components/Link";
+import { AutoSnippet, When } from "/src/components/CodeSnippet";
 
 Here are some commonly asked questions from the community:
 
-## What is the different between `ref.refresh` and `ref.invalidate`?
+## What is the difference between `ref.refresh` and `ref.invalidate`?
 
 You may have noticed that `ref` has two methods to force a provider to recompute,
 and wonder how they differ.
@@ -48,7 +49,7 @@ This is done on purpose to avoid writing code which conditionally
 depends on one or the other.
 
 One issue is that `Ref` and `WidgetRef`, although similar looking,
-have suble differences.  
+have subtle differences.  
 Code relying on both would be unreliable in ways that are difficult to spot.
 
 At the same time, relying on `WidgetRef` is equivalent to relying on `BuildContext`.
@@ -112,7 +113,7 @@ While you cannot use `hooks_riverpod` without `flutter_hooks`,
 both packages are versioned independently. A breaking change could happen
 in one but not the other.
 
-## Why does Riverpod uses `identical` instead of `==` to filter updates in some cases?
+## Why does Riverpod use `identical` instead of `==` to filter updates in some cases?
 
 Notifiers use `identical` instead of `==` to filter updates.
 

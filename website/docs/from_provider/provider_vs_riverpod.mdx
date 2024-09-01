@@ -1,19 +1,15 @@
 ---
 title: Provider vs Riverpod
+version: 1
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
-import CodeBlock from "@theme/CodeBlock";
 import family from "./family";
 import {
-  trimSnippet,
   AutoSnippet,
-  When,
-} from "../../src/components/CodeSnippet";
+} from "/src/components/CodeSnippet";
 
 
-This article recaps the defferences and the similarities between Provider and Riverpod.
+This article recaps the differences and the similarities between Provider and Riverpod.
 
 ## Defining providers
 
@@ -138,7 +134,7 @@ Provider optionally comes with a widget named `Consumer` (and variants such as `
 for reading providers.
 
 `Consumer` is helpful as a performance optimization, by allowing more granular rebuilds
-of the widget tree - updating only the revelant widgets when the state changes:
+of the widget tree - updating only the relevant widgets when the state changes:
 
 As such, if a provider was defined as:
 

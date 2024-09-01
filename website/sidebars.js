@@ -204,6 +204,16 @@ module.exports = {
       items: [
         {
           type: "link",
+          label: "DummyMart: Full CRUD app with authentication + go_router integration",
+          href: "https://github.com/dhafinrayhan/dummymart",
+        },
+        {
+          type: "link",
+          label: "Easy Todo Riverpod Architecture",
+          href: "https://github.com/ilovekimchi6/todo_easy_riverpod_architecture",
+        },
+        {
+          type: "link",
           label: "Android Launcher",
           href: "https://github.com/lohanidamodar/fl_live_launcher",
         },
@@ -292,6 +302,11 @@ module.exports = {
           type: "link",
           label: "Delivery App with Google Maps and Live Tracking",
           href: "https://github.com/AhmedLSayed9/deliverzler",
+        },
+        {
+          type: "link",
+          label: "ChatGPT Chat App with Riverpod",
+          href: "https://github.com/never-inc/chat_gpt_boilerplate",
         },
       ],
     },
